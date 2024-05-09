@@ -1,0 +1,1119 @@
+
+
+Deque  -
+	
+	1) Deque stands for Double ended queue.
+	2) it was provided by java in its jdk 1.6 version
+	3) it is child interface of Queue interface
+	4) it is almost all same as Queue but Queues are able to allow insertions at tail side and remove operation at head side,
+		but Deques are able to allow all the operations like add, remove, finding elements at the both the ends that is at head side and tail side 
+		
+		
+	
+	Deque methods -
+		
+		1) public void addFirst(Object element) -
+				it can be used to add the specified element as the first element at the head side 
+				
+		2) public void offerFirst(Object element) -
+				it can be used to add the specified element as the first element at the head side 
+				
+		
+		
+				difference between addFirst and offerFirst -
+				
+					1) Bounded Queues  -
+					2) UnBounded Queues -
+					
+					
+				1) Bounded Queues -
+						these queues are having capacity constrains , over the max capacity elements are not going to be allowed.
+					eg -
+						all the queues which are existed in java.util.concurrent package are Bounded queues
+						BlockingQueue, ArrayBlockingQueue, ....
+						
+						
+				2) UnBounded Queues -
+						these queues are not having capacity constrains, we can add the elements in the queues over its max capacity
+					eg - 
+						all queues which are existed in java.util package are UnBounded queues.
+						PriorityQueue, Dequeue, ArrayDeque, LinkedList, .....
+						
+						
+					if we add any element by using addFirst() over its max capacity in a Bounded queue then JVM will raise an exception , but if we use offerFirst() to add an element
+					to the Bounded queue over its max capacity then JVM will not raise an exception 
+			
+			
+		3) public void addLast(Object element) -
+				it can be used to add the specified element to the queue as last element at Tail side 
+				
+		4) public void offerLast(Object element) -
+				it can be used to add the specified element to the queue as last element at Tail side 
+				
+			
+			
+					example - 	import java.util.ArrayDeque;
+								import java.util.Deque;
+								
+								public class Test{
+								
+									public static void main(String[] args){
+									
+										Deque<String> dq = new ArrayDeque<String>();
+										dq.addLast("AAA");
+										dq.addLast("BBB");
+										dq.addLast("CCC");
+										System.out.println(dq);
+										
+										dq.offerLast("XXX");
+										dq.offerLast("YYY");
+										dq.offerLast("ZZZ");
+										System.out.println(dq);
+									}
+								}
+						
+						
+						
+						output -
+								[AAA, BBB, CCC]
+								[AAA, BBB, CCC, XXX, YYY, ZZZ]
+						
+						
+						
+					Note - 
+							what is difference between addLast() and offerLast() methods ?
+							
+							1) both methods are used to add the provided element as the last element at Tail side
+							2) if we access addLast() method to the Bounded queues over its max capacity then JVM will raise an exception, but if we access offerLast() over its max capacity
+								on Bounded queues then JVM will not raise any exception
+								
+								
+								
+								
+								
+				Find the output of the following program ??
+				
+						import java.util.*;
+						
+						class Test{
+							
+							public static void main(String[] args){
+									
+										Deque<String> dq = new ArrayDeque<String>();
+										
+										dq.addFirst("AAA");
+										dq.addLast("BBB");
+										dq.offerFirst("CCC");
+										dq.offerLast("DDD");
+										dq.addFirst("EEE");
+										dq.offerLast("FFF");
+										System.out.println(dq);
+									}
+						}
+						
+						
+						
+					output -	
+						[EEE, CCC, AAA, BBB, DDD, FFF]
+						
+			
+			
+			
+			
+		5) public Object removeFirst()  -
+				it can be used to remove and return First element from Deque at Head side
+				
+				
+		6) public Object pollFirst()  -
+				it can be used to remove and return First element from Deque at Head side
+				
+		
+
+			example -
+					import java.util.Deque;
+					import java.util.ArrayDeque;
+						
+						class Test{
+							
+							public static void main(String[] args){
+									
+										Deque<String> dq = new ArrayDeque<String>();
+										
+										dq.add("AAA");
+										dq.add("BBB");
+										dq.add("CCC");
+										dq.add("DDD");
+										dq.add("EEE");
+										dq.add("FFF");
+										System.out.println(dq);					//[AAA, BBB, CCC, DDD, EEE, FFF]
+										System.out.println(dq.removeFirst());	// AAA
+										System.out.println(dq);					//[BBB, CCC, DDD, EEE, FFF]
+										System.out.println(dq.removeFirst());	// BBB
+										System.out.println(dq);					//[CCC, DDD, EEE, FFF]
+										System.out.println(dq.pollFirst());		// CCC
+										System.out.println(dq);					//[DDD, EEE, FFF]
+										System.out.println(dq.pollFirst());		// DDD
+										System.out.println(dq);					//[EEE, FFF]
+									}
+						}
+						
+						
+						
+					output -	
+						[EEE, CCC, AAA, BBB, DDD, FFF]
+						
+						
+						
+						
+						
+				Q . what is difference between pollFirst() and removeFirst() ?
+				
+					1) both the methods are used to remove and return head element from the queue at head side
+					2) but if we access pollFirst() on empty Dequeue then JVM will not raise any exception, where JVM will return Null value
+					3) if we access removeFirst() on empty Dequeue then JVM will raise an exception like java.util.NoSuchElementException
+					
+					
+		
+		7) public Object removeLast()  -
+				it can be used to remove and return last element from queue at Tail side.
+				
+				
+		8) public Object pollLast()  -
+				it can be used to remove and return last element from queue at Tail side.
+				
+				
+				
+			example -
+					import java.util.Deque;
+					import java.util.ArrayDeque;
+						
+						class Test{
+							
+							public static void main(String[] args){
+									
+										Deque<String> dq = new ArrayDeque<String>();
+										
+										dq.add("AAA");
+										dq.add("BBB");
+										dq.add("CCC");
+										dq.add("DDD");
+										dq.add("EEE");
+										dq.add("FFF");
+										System.out.println(dq);					//[AAA, BBB, CCC, DDD, EEE, FFF]
+										System.out.println(dq.removeLast());		// FFF
+										System.out.println(dq);					//[AAA, BBB, CCC, DDD, EEE]
+										System.out.println(dq.removeLast());		// EEE
+										System.out.println(dq);					//[AAA, BBB, CCC, DDD]
+										System.out.println(dq.pollLast());		// DDD
+										System.out.println(dq);					//[AAA, BBB, CCC]
+										System.out.println(dq.pollLast());		// CCC
+										System.out.println(dq);					//[AAA, BBB]
+									}
+						}
+						
+						
+						
+					output -	
+						[AAA, BBB]
+							
+							
+			Q . what is difference between pollLast() and removeLast() ?
+				
+					1) both the methods are used to remove and return last element from the queue at Tail side
+					2) but if we access pollLast() on empty Dequeue then JVM will not raise any exception, where JVM will return Null value
+					3) if we access removeLast() on empty Dequeue then JVM will raise an exception like java.util.NoSuchElementException
+					
+					
+					
+					
+				Find the output of the following program ??
+				
+						import java.util.*;
+						
+						class Test{
+							
+							public static void main(String[] args){
+									
+										Deque<String> dq = new ArrayDeque<String>();
+										
+										dq.addFirst("AAA");
+										dq.addLast("BBB");
+										dq.offerFirst("CCC");
+										dq.offerLast("DDD");
+										dq.pollFirst();
+										dq.removeLast();
+										dq.offerLast("EEE");
+										dq.removeFirst();
+										dq.offerFirst("FFF");
+										System.out.println(dq);
+									}
+						}
+						
+						
+						
+					output -	
+						[FFF, BBB, EEE]
+							
+		
+
+			
+		9) public Object getFirst()  -
+				it can be used to return(but not remove) first element from Deque at Head side
+				
+				
+		10) public Object peekFirst()  -
+				it can be used to return(but not remove) first element from Deque at Head side
+				
+				
+			eg - 
+				
+				import java.util.Deque;
+					import java.util.ArrayDeque;
+						
+						class Test{
+							
+							public static void main(String[] args){
+									
+										Deque<String> dq = new ArrayDeque<String>();
+										
+										dq.add("AAA");
+										dq.add("BBB");
+										dq.add("CCC");
+										dq.add("DDD");
+										dq.add("EEE");
+										System.out.println(dq);					//[AAA, BBB, CCC, DDD, EEE]
+										System.out.println(dq.getFirst());		// AAA	
+										System.out.println(dq.peekFirst());		// AAA			
+									}
+						}
+						
+						
+						
+					
+				Q. what difference between getFirst() and peekFirst() ?
+					
+					1) both are used to get first element form Deque at head side but if we access getFirst() method on empty Dequeue the JVM will raise an exception like
+						NoSuchElementException
+					2) if we access peekFirst() on the empty Deques the JVM will not raise an exception, where JVM will return Null value
+					
+					
+		
+		
+		11) public Object getLast()  -
+				it can be used to return(but not remove) last element from Deque at Tail side
+				
+				
+		12) public Object peekLast()  -
+				it can be used to return(but not remove) Last element from Deque at Tail side
+				
+				
+			eg - 
+				
+				import java.util.Deque;
+					import java.util.ArrayDeque;
+						
+						class Test{
+							
+							public static void main(String[] args){
+									
+										Deque<String> dq = new ArrayDeque<String>();
+										
+										dq.add("AAA");
+										dq.add("BBB");
+										dq.add("CCC");
+										dq.add("DDD");
+										dq.add("EEE");
+										System.out.println(dq);					//[AAA, BBB, CCC, DDD, EEE]
+										System.out.println(dq.getLast());		// EEE	
+										System.out.println(dq.peekLast());		// EEE			
+									}
+						}
+						
+						
+						
+					
+				Q. what difference between getLast() and peekLast() ?
+					
+					1) both are used to get last element form Deque at tail side but if we access getLast() method on empty Dequeue the JVM will raise an exception like
+						NoSuchElementException
+					2) if we access peekLast() on the empty Deques the JVM will not raise an exception, where JVM will return Null value
+					
+		
+
+		13) public boolean removeFirstOccurence(Object element) -
+					
+					1) it can be used to remove specified element at its first occurence,
+					2) if the element is removed then it will return true value,
+					3) if the element is not removed the it will return false value
+					
+					
+				eg - 
+				
+				import java.util.Deque;
+					import java.util.ArrayDeque;
+						
+						class Test{
+							
+							public static void main(String[] args){
+									
+										Deque<String> dq = new ArrayDeque<String>();
+										
+										dq.add("AAA");
+										dq.add("BBB");
+										dq.add("CCC");
+										dq.add("DDD");
+										dq.add("BBB");
+										dq.add("EEE");
+										dq.add("FFF");
+										dq.add("BBB");
+										System.out.println(dq);								//[AAA, BBB, CCC, DDD, BBB, EEE, FFF, BBB]
+										System.out.println(dq.removeFirstOccurence("BBB"));		// True	
+										System.out.println(dq);								//[AAA, CCC, DDD, BBB, EEE, FFF, BBB]
+										System.out.println(dq.removeFirstOccurence("XXX"));		// False											
+									}
+						}
+						
+						
+						
+						
+						
+		14) public boolean removeLastOccurence(Object element) -
+					
+					1) it can be used to remove specified element at its last occurence,
+					2) if the element is removed then it will return true value,
+					3) if the element is not removed the it will return false value
+					
+					
+				eg - 
+				
+				import java.util.Deque;
+					import java.util.ArrayDeque;
+						
+						class Test{
+							
+							public static void main(String[] args){
+									
+										Deque<String> dq = new ArrayDeque<String>();
+										
+										dq.add("AAA");
+										dq.add("BBB");
+										dq.add("CCC");
+										dq.add("DDD");
+										dq.add("BBB");
+										dq.add("EEE");
+										dq.add("FFF");
+										dq.add("BBB");
+										System.out.println(dq);								//[AAA, BBB, CCC, DDD, BBB, EEE, FFF, BBB]
+										System.out.println(dq.removeLastOccurence("BBB"));		// True	
+										System.out.println(dq);								//[AAA, BBB, CCC, DDD, BBB, EEE, FFF]
+										System.out.println(dq.removeFirstOccurence("XXX"));		// False											
+									}
+						}
+						
+						
+						
+		15) public Iterator iterator() -
+				it can be used to get all the elements of Deque in an Iterator object in forward direction in order to read one by one element
+				
+			eg -
+				import java.util.Deque;
+					import java.util.ArrayDeque;
+						
+						class Test{
+							
+							public static void main(String[] args){
+									
+										Deque<String> dq = new ArrayDeque<String>();
+										
+										dq.add("AAA");
+										dq.add("BBB");
+										dq.add("CCC");
+										dq.add("DDD");
+										dq.add("EEE");
+										dq.add("FFF");
+										System.out.println(dq);								//[AAA, BBB, CCC, DDD, EEE, FFF]
+										
+										Iterator<String> itr = dq.iterator();
+										
+										while(itr.hasNext()){
+											System.out.println(itr.next());
+										}
+									}
+						}
+						
+						output -
+							AAA
+							BBB
+							CCC
+							DDD
+							EEE
+							FFF
+							
+							
+							
+	
+		16) public Iterator decendingIterator()  -
+					it can be used to get all elements of the Deque in an Iterator Object in Backward direction or reverse direction
+				eg -
+					
+					import java.util.Deque;
+					import java.util.ArrayDeque;
+						
+						class Test{
+							
+							public static void main(String[] args){
+									
+										Deque<String> dq = new ArrayDeque<String>();
+										
+										dq.add("AAA");
+										dq.add("BBB");
+										dq.add("CCC");
+										dq.add("DDD");
+										dq.add("EEE");
+										dq.add("FFF");
+										System.out.println(dq);								//[AAA, BBB, CCC, DDD, EEE, FFF]
+										
+										Iterator<String> itr = dq.decendingIterator();
+										
+										while(itr.hasNext()){
+											System.out.println(itr.next());
+										}
+									}
+						}
+						
+						output -
+							FFF
+							EEE
+							DDD
+							CCC
+							BBB
+							AAA
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	ArrayDeque  -
+		
+		1) it was provided by java in its jdk 1.6 version
+		2) it is not legacy collection 
+		3) it is direct implementation class of Deque interface, where Deque interface is child interface to Queue interface where Queue interface is child interface to Collection
+			interface
+		4) here ArrayDeque has to provide implementation for all the methods of Deque interface, Queue interface and Collection interface
+		
+		5) it is not index based 
+		6) it is allows duplicates elements 
+		7) it follows insertion order 
+		8) it does not follow Sorting order
+		9) it is allows Heterogeneuos elements
+		10) it does not allow null elements
+		
+		11) its initial capacity is 16 elements
+		12) its internal data structure is resizable-Array
+		
+		13) it is not synchronized collection
+		14) no method is synchronized in ArrayDeque
+		15) it allows more then one Thread at a time to access data
+		16) it follows parallel execution of the threads
+		17) it reduces application execution time
+		18) its improves application performance
+		19) it does not give guarantee for data consistency  
+		20) it is not thread safe resource
+		
+		
+		
+		example -
+				
+				import java.util.ArrayDeque;
+				
+				public class Test{
+				
+					public static void main(String[] args){
+					
+						ArrayDeque<String> adq = new ArrayDeque<String>();
+						adq.add("AAA");
+						adq.add("BBB");
+						adq.add("CCC");
+						adq.add("DDD");
+						adq.add("EEE");
+						System.out.println(adq);          // [AAA, BBB, CCC, DDD, EEE]
+						adq.add("AAA");
+						adq.add("BBB");					// [AAA, BBB, CCC, DDD, EEE, AAA, BBB]	
+						
+						
+						ArrayDeque adq1 = new ArrayDeque();
+						adq1.add("AAA");
+						adq1.add(10);
+						adq1.add(22.00f);
+						adq1.add("DDD");
+						adq1.add("EEE");
+						System.out.println(adq1);          // [AAA, 10, 22.00, DDD, EEE]
+					}
+				}
+				
+				
+				
+				
+	Constructors -
+		1) public ArrayDeque()  -
+				
+				it can be used to create an empty ArrayDeque Object with the initial capacity 16 elements.
+				
+				
+			eg -
+					import java.util.ArrayDeque;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							ArrayDeque<String> adq = new ArrayDeque<String>();
+							
+							System.out.println(adq);
+						}
+					}
+					
+					
+					
+		
+		2) public ArrayDeque(int capacity)  -
+				
+				it can be used to create an empty ArrayDeque object with the specified capacity 
+				
+				
+			eg -
+					import java.util.ArrayDeque;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							ArrayDeque<String> adq = new ArrayDeque<String>(30);
+							
+							System.out.println(adq);
+						}
+					}
+					
+					
+		
+		3) public ArrayDeque(Collection c)  -
+				
+				it can be used to create an empty ArrayDeque object with the elements of the specified Collection , where Collection may be List, Set , Queue
+				
+				
+			eg -
+					import java.util.ArrayDeque;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							List<String> l = new ArrayList<String>();
+							l.add("AAA");
+							l.add("BBB");
+							l.add("CCC");
+							l.add("DDD");
+							
+							ArrayDeque<String> adq = new ArrayDeque<String>(l);
+							
+							System.out.println(adq);
+						}
+					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Map  -
+		
+		eg - 
+			to represent Telephone directory , where data like phone number and customer name are represented in the form of ket-value pairs there we will use Maps
+			
+		eg - 
+			to represent Students Attendence Register we will use Maps, because in Students attendence register data like Students roll number nad Students name represented
+			in the form of key-value pairs 
+			
+			
+		1) in maps both key-value are objects key-value are not primitive data types atleast Wrapper classes objects 
+		2) in key-value pairs key must be unique , they must not allowed duplicates but values may be duplicated 
+		3) in maps , bydefault both insertion and sorting order are not followed
+		
+			Note -
+				following insertion order od sorting order is varied from one implementation class to another implementation class
+				
+			1) HashMap -
+					is not following both insertion order and sorting order
+					
+			2) LinkedHashMap -
+					is able to follow insertion order.
+					
+			3) SortedMap, NavigableMap, TreeMap are able to follow Sorting order
+			
+			
+		4) in Maps, bydefault Heterogeneuos elements are allowed 
+			Note -
+				SortedMap, NavigableMap, TreeMap are able to allow only Homogeneous elements at key side.
+		
+		5) in Maps , bydefault keys are able to allow only one null element, because keys are not allowing duplicates but values are able to allow any no of null elements 
+			Note -
+				SortedMap, NavigableMap, TreeMap, HashTable are not allowing even single null element in keys
+				
+				
+				
+				
+				
+				
+				
+				
+	Methods in Map -
+		
+		1) public Object put(Object key, Object value) -
+				it can be used to add the specified key-value pair to the map, here 
+				1) if the key-value is new key-value pair and value is not replacing any existing value then put() method will return null value 
+				2) if any key-value pair existed already with the same key then existed value will be replaced with the new specified value  and old value which has been 
+					removed will be returned from put() method
+					
+					
+			eg -
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							System.out.println(map.put("A","AAA"));			// null
+							System.out.println(map.put("B","BBB"));			// null
+							System.out.println(map.put("C","CCC"));			// null
+							System.out.println(map.put("D","DDD"));			// null
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD]
+							System.out.println(map.put("B","XXX"));			// BBB
+							System.out.println(map);						// [A= AAA, B=XXX, C= CCC, D=DDD]
+							System.out.println(map.put("C","YYY"));			// CCC
+							System.out.println(map);						// [A= AAA, B=XXX, C= YYY, D=DDD]
+							System.out.println(map.put("D","ZZZ"));			// DDD
+							System.out.println(map);						// [A= AAA, B=XXX, C= YYY, D=ZZZ]
+						}
+					}
+					
+					
+					
+					
+					
+		2) public void putAll(Map map)  -
+				
+				it can be used to add all the key-value pairs which are existed in specified map
+				
+				eg -
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							System.out.println(map.put("A","AAA"));			
+							System.out.println(map.put("B","BBB"));			
+							System.out.println(map.put("C","CCC"));			
+							System.out.println(map.put("D","DDD"));			
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD]
+							
+							Map<String, String> map1 = new HashMap<String, String>();
+							map1.putAll(map);
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD]
+						}
+					}
+					
+		
+		
+		3) public Object get(Object key) -
+				
+				it can be used to get the value on the basis of the provided key.
+				
+			eg -
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							System.out.println(map.put("A","AAA"));			
+							System.out.println(map.put("B","BBB"));			
+							System.out.println(map.put("C","CCC"));			
+							System.out.println(map.put("D","DDD"));			
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD]
+							
+							System.out.println(map.get("A"));				// AAA
+							System.out.println(map.get("B"));				// BBB
+							System.out.println(map.get("C"));				// CCC
+							System.out.println(map.get("D"));				// DDD 
+							System.out.println(map.get("X"));				// null
+							System.out.println(map.get("Y"));				// null
+							System.out.println(map.get("Z"));				// null
+						}
+					}
+					
+					
+					
+					
+					
+					
+		4) public void remove(Object key)  -
+				
+				it can be used to remove a key-value pair on the basis of provided key and return the value from the removed key-value pair, if the associated key-value pair is not existed in the Map the JVM will return null value
+				
+				
+			eg -
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							map.put("A","AAA");			
+							map.put("B","BBB");			
+							map.put("C","CCC");			
+							map.put("D","DDD");			
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD]
+							
+							System.out.println(map.remove("B"));				// BBB
+							
+							System.out.println(map);						// [A= AAA, C= CCC, D=DDD]
+							
+							System.out.println(map.remove("D"));				// BBB
+							
+							System.out.println(map);						// [A= AAA, C= CCC]
+							
+							System.out.println(map.remove("X"));				// null
+						}
+					}	
+				
+				
+				
+		5) public int size()  -
+				 it can be used to get the size of the map, that is the no of key-value pairs which are existed in Map.
+				 
+			eg -
+				
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							map.put("A","AAA");			
+							map.put("B","BBB");			
+							map.put("C","CCC");			
+							map.put("D","DDD");			
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD]
+							
+							System.out.println(map.size());					// 4
+						}
+					}		
+		
+
+		6) public void clear() -
+					it can be used to remove all the key-value pairs which are existed in Map
+					
+				eg -
+				
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							map.put("A","AAA");			
+							map.put("B","BBB");			
+							map.put("C","CCC");			
+							map.put("D","DDD");			
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD]
+							
+							map.clear()	
+							System.out.println(map);						// []												
+						}
+					}	
+
+
+
+		7) public boolean isEmpty()  -
+				it can be used to check weather the Map is empty or not,
+				if the map is empty then isEmpty() method will be return true value
+				if the map is not empty then isEmpty() method will return false value
+				
+				
+			eg -
+				
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							map.put("A","AAA");			
+							map.put("B","BBB");			
+							map.put("C","CCC");			
+							map.put("D","DDD");			
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD]
+							
+							System.out.println(map.isEmpty());				// false
+							map.clear()	
+							System.out.println(map.isEmpty());				// true												
+						}
+					}	
+					
+					
+					
+		8) public boolean containsKey(Object key)  -
+				
+				it can be used to check weather specified key is existed or not at keys side of the key-value pairs in map.
+				if the specified key is existed then it will return true value,
+				it the specified key is not existed then it will return false value
+				
+			eg -
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							map.put("A","AAA");			
+							map.put("B","BBB");			
+							map.put("C","CCC");			
+							map.put("D","DDD");	
+							map.put("E","EEE");								
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD, E=EEE]
+							
+							System.out.println(map.containsKey("B"));		// True	
+							System.out.println(map.containsKey("Z"));		// false												
+						}
+					}	
+		
+
+		
+		9) public boolean containsValue()  -
+		
+				it can be used to check weather specified value is existed or not at value side of the key-value pairs in map.
+				if the specified value is existed then it will return true value,
+				it the specified value is not existed then it will return false value
+				
+			eg -
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							map.put("A","AAA");			
+							map.put("B","BBB");			
+							map.put("C","CCC");			
+							map.put("D","DDD");	
+							map.put("E","EEE");								
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD, E=EEE]
+							
+							System.out.println(map.containsValue("BBBB"));		// True	
+							System.out.println(map.containsValue("ZZZ"));		// false												
+						}
+					}	
+					
+					
+					
+		10) public Set keySet()  -
+		
+				it can be used to get all the keys of the key-value pairs which are existed in the Map
+				
+			eg -
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							map.put("A","AAA");			
+							map.put("B","BBB");			
+							map.put("C","CCC");			
+							map.put("D","DDD");	
+							map.put("E","EEE");								
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD, E=EEE]
+							
+							Set<String> set = map.keySet();
+							System.out.println(set);						// [A, B, C, D, E]
+										
+						}
+					}
+
+
+
+		11) public Collection values() -
+				it can be used to get all the values of the key-value pairs which are existed in the Map
+				
+			eg -
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							map.put("A","AAA");			
+							map.put("B","BBB");			
+							map.put("C","CCC");			
+							map.put("D","DDD");	
+							map.put("E","EEE");								
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD, E=EEE]
+							
+							Collection<String> c = map.values();
+							System.out.println(c);							// [AAA, BBB, CCC, DDD, EEE]
+										
+						}
+					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Entry  -
+		
+		1) Entry is key-value pair existed in the Map
+		2) Map is the set of Entry Objects, where Entry Object is able to represent single key-value pair
+		3) to represent Entry Objects in java, Java has provided Entry as an inner interface inside Map interface
+		
+		
+		
+			public interface Map{
+			
+				public interface Entry{
+				
+					public void setValue(Object value);
+					public Object getValue();
+					public Object getKey();
+				}
+			}
+			
+			
+		eg -
+					import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							Map<String, String> map = new HashMap<String, String>();
+							
+							map.put("A","AAA");			
+							map.put("B","BBB");			
+							map.put("C","CCC");			
+							map.put("D","DDD");	
+							map.put("E","EEE");		
+							map.put("F","FFF");
+							System.out.println(map);						// [A= AAA, B=BBB, C= CCC, D=DDD, E=EEE, F=FFF]
+							
+							Set<Map.Entry<String,String>> set = map.entrySet();
+							
+							Iterator<Map.Entry<String, String>> itr = set.iterator();
+							
+							while(itr.hasNext){
+								
+								Map.Entry<String,String>> entry = itr.next();
+								System.out.println(entry.getKey()+ "  " entry.getValue());
+							}
+										
+						}
+					}
+					
+			output  -
+					
+					A		AAA
+					B 		BBB 
+					C       CCC
+					D 		DDD
+					E 		EEE
+					F       FFF
+					
+					
+					
+					
+					
+					
+					
+					
+					// import java.util.Map;
+					import java.util.HashMap;
+					
+					public class Test{
+					
+						public static void main(String[] args){
+						
+							HashMap<String, String> trainer = new HashMap<String, String>();
+							
+							trainer.put("Nagoor","Core java");			
+							trainer.put("Nageshwar","Adv java");			
+							trainer.put("Durga","Spring");			
+							trainer.put("Raten","Hibernate");
+							trainer.put("Ramesh","Web Services");
+							
+							System.out.println(trainer);						// [Raten= Hibernate, Nageshwar=Adv java, Ramesh= Web Services, Durga=Spring, Nagoor=Core java]
+							
+						
+						}
+					}
